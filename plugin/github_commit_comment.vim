@@ -16,9 +16,9 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! -nargs=0 GitHubLineComment   call github_commit_comment#comment_line()
-command! -nargs=0 GitHubFileComment   call github_commit_comment#comment_file()
-command! -nargs=0 GitHubCommitComment call github_commit_comment#comment_commit()
+command! -nargs=* GitHubLineComment   call github_commit_comment#comment_line(<f-args>)
+command! -nargs=* GitHubFileComment   call github_commit_comment#comment_file(<f-args>)
+command! -nargs=* GitHubCommitComment call github_commit_comment#comment_commit(<f-args>)
 
 let g:loaded_github_commit_comment = 1
 

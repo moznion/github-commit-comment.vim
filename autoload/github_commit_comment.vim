@@ -1,19 +1,19 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! github_commit_comment#comment_commit()
-  call s:comment(0)
+function! github_commit_comment#comment_commit(...)
+  call s:comment(0, a:000)
 endfunction
 
-function! github_commit_comment#comment_file()
-  call s:comment(1)
+function! github_commit_comment#comment_file(...)
+  call s:comment(1, a:000)
 endfunction
 
-function! github_commit_comment#comment_line()
-  call s:comment(2)
+function! github_commit_comment#comment_line(...)
+  call s:comment(2, a:000)
 endfunction
 
-function! s:comment(comment_type) " `comment_type` is very s**ks
+function! s:comment(comment_type, message) " `comment_type` is very s**ks
   if !s:is_command_executable('git')
     return
   endif
@@ -31,20 +31,30 @@ function! s:comment(comment_type) " `comment_type` is very s**ks
   let t:sha    = substitute(system('git rev-parse HEAD'), '\r\=\n$', '', '')
   let t:origin = s:fetch_origin_info()
 
-  let l:tmpfile = '__github_commit_comment_vim_' . localtime()
-  10new `=l:tmpfile`
-  setlocal filetype=markdown
-  cabbrev wq <C-r>='w'<CR>
-  autocmd BufWriteCmd <buffer> let t:github_commit_comment_contents = getline(0,'$')
-  autocmd BufWriteCmd <buffer> :q!
-  autocmd BufWriteCmd <buffer> call s:post(
-    \  t:sha,
-    \  t:origin,
-    \  t:github_commit_comment_contents,
-    \  t:relative_path,
-    \  t:position,
-  \ )
-  autocmd BufWriteCmd <buffer> :cabbrev wq <C-r>='wq'<CR>
+  if a:message != [] " give message by f-args
+    call s:post(
+      \  t:sha,
+      \  t:origin,
+      \  [join(a:message, " ")],
+      \  t:relative_path,
+      \  t:position,
+    \ )
+  else
+    let l:tmpfile = '__github_commit_comment_vim_' . localtime()
+    10new `=l:tmpfile`
+    setlocal filetype=markdown
+    cabbrev wq <C-r>='w'<CR>
+    autocmd BufWriteCmd <buffer> let t:github_commit_comment_message = getline(0,'$')
+    autocmd BufWriteCmd <buffer> :q!
+    autocmd BufWriteCmd <buffer> call s:post(
+      \  t:sha,
+      \  t:origin,
+      \  t:github_commit_comment_message,
+      \  t:relative_path,
+      \  t:position,
+    \ )
+    autocmd BufWriteCmd <buffer> :cabbrev wq <C-r>='wq'<CR>
+  endif
 endfunction
 
 function! s:post(sha, origin, body, path, position)
