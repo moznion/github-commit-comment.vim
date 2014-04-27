@@ -55,11 +55,12 @@ function! s:post(sha, origin, body, path, position)
     \  'position': a:position
   \ })
 
-  let l:ret = system('curl -s -k -i -u ' . g:github_commit_comment_vim.token . ':x-oauth-basic https://api.github.com/repos/' . a:origin.user . '/' . a:origin.repos . '/commits/' . a:sha . "/comments -X POST -d '" . l:payload . "'")
+  let l:url = printf('https://api.github.com/repos/%s/%s/commits/%s/comments', a:origin.user, a:origin.repos, a:sha)
+  let l:ret = webapi#http#post(l:url, l:payload, {'Authorization': 'token ' . g:github_commit_comment_vim.token})
 
   redraw
 
-  if s:is_success(l:ret)
+  if l:ret.status == 201
     echo "Posted"
   else
     echo "Failed to post"
@@ -87,23 +88,6 @@ function! s:retrieve_relative_path()
   let l:git_root_fullpath = substitute(system('git rev-parse --show-toplevel'), '\r\=\n$', '', '')
   let l:current_file_fullpath = expand('%:p')
   return substitute(l:current_file_fullpath, '^' . l:git_root_fullpath . '/', '', '')
-endfunction
-
-function! s:is_success(ret)
-  if s:get_status_code(a:ret) == 201 " Created
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
-function! s:get_status_code(ret)
-  for l:line in split(a:ret, '\n')
-    let l:status_code = matchstr(l:line, '^Status:\s\+\zs\d\+\ze\s\+')
-    if l:status_code
-      return l:status_code
-    endif
-  endfor
 endfunction
 
 let &cpo = s:save_cpo
