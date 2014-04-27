@@ -14,7 +14,7 @@ function! github_commit_comment#comment_line()
 endfunction
 
 function! s:comment(comment_type) " `comment_type` is very s**ks
-  if !s:is_command_executable('git') || !s:is_command_executable('curl')
+  if !s:is_command_executable('git')
     return
   endif
 
