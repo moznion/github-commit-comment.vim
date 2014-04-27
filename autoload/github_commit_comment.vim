@@ -38,12 +38,12 @@ function! s:comment(comment_type) " `comment_type` is very s**ks
   autocmd BufWriteCmd <buffer> let t:github_commit_comment_contents = getline(0,'$')
   autocmd BufWriteCmd <buffer> :q!
   autocmd BufWriteCmd <buffer> call s:post(
-    \    t:sha,
-    \    t:origin,
-    \    t:github_commit_comment_contents,
-    \    t:relative_path,
-    \    t:position,
-    \ )
+    \  t:sha,
+    \  t:origin,
+    \  t:github_commit_comment_contents,
+    \  t:relative_path,
+    \  t:position,
+  \ )
   autocmd BufWriteCmd <buffer> :cabbrev wq <C-r>='wq'<CR>
 endfunction
 
@@ -79,8 +79,8 @@ function! s:fetch_origin_info()
   let l:origin = split(substitute(system('git config --get remote.origin.url'), '\r\=\n$', '', ''), '/')
 
   return {
-    \ 'repos': substitute(l:origin[-1], '\.git$', '', ''),
-    \ 'user': split(l:origin[-2], ':')[-1]
+    \  'repos': substitute(l:origin[-1], '\.git$', '', ''),
+    \  'user': split(l:origin[-2], ':')[-1]
   \ }
 endfunction
 
