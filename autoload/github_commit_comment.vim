@@ -32,8 +32,9 @@ function! s:comment(comment_type) " `comment_type` is very s**ks
   let t:origin = s:fetch_origin_info()
 
   let l:tmpfile = '__github_commit_comment_vim_' . localtime()
-  :10new `=l:tmpfile`
+  10new `=l:tmpfile`
   setlocal filetype=markdown
+  cabbrev wq <C-r>='w'<CR>
   autocmd BufWriteCmd <buffer> let t:github_commit_comment_contents = getline(0,'$')
   autocmd BufWriteCmd <buffer> :q!
   autocmd BufWriteCmd <buffer> call s:post(
@@ -43,7 +44,7 @@ function! s:comment(comment_type) " `comment_type` is very s**ks
     \    t:relative_path,
     \    t:position,
     \ )
-
+  autocmd BufWriteCmd <buffer> :cabbrev wq <C-r>='wq'<CR>
 endfunction
 
 function! s:post(sha, origin, body, path, position)
