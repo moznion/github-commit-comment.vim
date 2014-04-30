@@ -10,8 +10,8 @@ function! github_commit_comment#git#fetch_origin_info()
   \ }
 endfunction
 
-function! github_commit_comment#git#get_current_sha()
-  return substitute(system('git rev-parse HEAD'), '\r\=\n$', '', '')
+function! github_commit_comment#git#get_last_modified_sha()
+  return system('git log --pretty=format:"%H" -1 ' . expand('%:p'))
 endfunction
 
 function! github_commit_comment#git#retrieve_relative_path_from_git_root()

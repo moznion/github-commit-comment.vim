@@ -12,13 +12,13 @@ This plugin supports the following features;
     - File comment
 - Show commit line comment on vim
 
-These command work on current git revision (means `HEAD`) and `origin` of remote.
+These command work on last modified git revision of editing file and `origin` of remote.
 
 ## Commands
 
 ### GitHubLineComment [comment]
 
-Posts commit line comment to current revision and current cursored line.
+Posts commit line comment to last modified revision of editing file and current cursored line.
 
 #### Without command argument
 ![commit line comment](https://dl.dropboxusercontent.com/u/14832699/github-commit-comment-vim/line_comment.gif)
@@ -28,12 +28,12 @@ Posts commit line comment to current revision and current cursored line.
 
 ### GitHubCommitComment [comment]
 
-Posts commit comment to current revision.
+Posts commit comment to last modified revision of editing file.
 ![commit comment](https://dl.dropboxusercontent.com/u/14832699/github-commit-comment-vim/commit_comment.gif)
 
 ### GitHubFileComment [comment]
 
-Posts commit file comment to current revision and current file.
+Posts commit file comment to last modified revision of editing file and current file.
 ![commit file comment](https://dl.dropboxusercontent.com/u/14832699/github-commit-comment-vim/file_comment.gif)
 
 ### GitHubFetchCommitComment

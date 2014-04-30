@@ -3,7 +3,7 @@ set cpo&vim
 
 function! github_commit_comment#fetch#fetch()
   let l:origin = github_commit_comment#git#fetch_origin_info()
-  let l:sha    = github_commit_comment#git#get_current_sha()
+  let l:sha    = github_commit_comment#git#get_last_modified_sha()
   let l:relative_path = github_commit_comment#git#retrieve_relative_path_from_git_root()
   let l:absolute_path = expand('%:p')
 
