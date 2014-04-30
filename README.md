@@ -48,7 +48,7 @@ Fetch commit comments and show line comments on Vim (insert into quickfix)
 2.  Please put `.github_commit_comment.vim` file on your home directory. And fill github access token into this file. For example;
 
 ```vim
-let g:github_commit_comment_vim = {'token': '4be7622cf9d7b2154255e2afeb2384e0898f3046'}
+let g:github_commit_comment_vim = {'token': '__YOUR_ACCESS_TOKEN__'}
 ```
 
 ## Dependencies
