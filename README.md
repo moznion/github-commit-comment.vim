@@ -43,12 +43,33 @@ Fetch commit comments and show line comments on Vim (insert into quickfix)
 
 ## Configurations
 
+### Authentication (requires)
+
 1. Generate access token of GitHub at "Personal access tokens" ([https://github.com/settings/applications](https://github.com/settings/applications)). This plugin only requires `repo` permission.
 
-2.  Please put `.github_commit_comment.vim` file on your home directory. And fill github access token into this file. For example;
+2. Please put `.github_commit_comment.vim` file on your home directory. And fill github access token into this file. For example;
 
 ```vim
 let g:github_commit_comment_vim = {'token': '__YOUR_ACCESS_TOKEN__'}
+```
+
+### Specify API Endpoint (optional)
+
+Fill URL of API endpoint in `.github_commit_comment.vim`, like so;
+
+```vim
+let g:github_commit_comment_vim = {'api_endpoint': 'http://example.com/api/v3'}
+```
+
+Default API endpoint is "https://api.github.com". If you don't specify `api_endpoin`, this plugin use this URL.
+
+### Sample of configuration file
+
+```vim
+let g:github_commit_comment_vim = {
+      \ 'token': '__YOUR_ACCESS_TOKEN__',
+      \ 'api_endpoint': 'http://example.com/api/v3'
+\ }
 ```
 
 ## Dependencies

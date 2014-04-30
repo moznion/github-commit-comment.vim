@@ -7,13 +7,7 @@ function! github_commit_comment#fetch#fetch()
   let l:relative_path = github_commit_comment#git#retrieve_relative_path_from_git_root()
   let l:absolute_path = expand('%:p')
 
-  let l:url = printf(
-    \ 'https://api.github.com/repos/%s/%s/commits/%s/comments',
-    \ l:origin.user,
-    \ l:origin.repos,
-    \ l:sha
-  \ )
-
+  let l:url = github_commit_comment#api#build_comments_api_url(l:origin, l:sha)
   let l:ret = webapi#http#get(l:url, {
     \ 'Authorization': 'token ' . g:github_commit_comment_vim.token
   \ })

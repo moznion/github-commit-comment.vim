@@ -55,7 +55,7 @@ function! s:post(sha, origin, body, path, position)
     \  'position': a:position
   \ })
 
-  let l:url = printf('https://api.github.com/repos/%s/%s/commits/%s/comments', a:origin.user, a:origin.repos, a:sha)
+  let l:url = github_commit_comment#api#build_comments_api_url(a:origin, a:sha)
   let l:ret = webapi#http#post(l:url, l:payload, {'Authorization': 'token ' . g:github_commit_comment_vim.token})
 
   redraw
