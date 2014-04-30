@@ -20,10 +20,10 @@ These command work on current git revision (means `HEAD`) and `origin` of remote
 
 Posts commit line comment to current revision and current cursored line.
 
-Without command argument
+#### Without command argument
 ![commit line comment](https://dl.dropboxusercontent.com/u/14832699/github-commit-comment-vim/line_comment.gif)
 
-With command argument
+#### With command argument
 ![commit line comment with argument](https://dl.dropboxusercontent.com/u/14832699/github-commit-comment-vim/line_comment2.gif)
 
 ### GitHubCommitComment [comment]
