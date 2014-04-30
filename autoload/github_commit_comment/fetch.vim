@@ -33,7 +33,7 @@ function! github_commit_comment#fetch#fetch()
 
   call setqflist(l:info, 'r')
 
-  if b:syntastic_loclist
+  if exists('b:syntastic_loclist')
     unlet b:syntastic_loclist
   endif
 
