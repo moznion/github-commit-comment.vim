@@ -42,6 +42,7 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
       \  t:position,
     \ )
     autocmd BufWriteCmd <buffer> :cabbrev wq <C-r>='wq'<CR>
+    autocmd BufWriteCmd <buffer> call github_commit_comment#fetch#fetch()
   endif
 endfunction
 
