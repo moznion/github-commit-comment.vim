@@ -61,9 +61,9 @@ function! s:post(sha, origin, body, path, position)
   redraw
 
   if l:ret.status == 201
-    echo "Posted"
+    echo 'Posted (' . a:sha[0:6] . ')'
   else
-    echo "Failed to post"
+    echo 'Failed to post'
   endif
 endfunction
 
