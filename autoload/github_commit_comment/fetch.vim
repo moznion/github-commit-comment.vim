@@ -38,6 +38,11 @@ function! github_commit_comment#fetch#fetch()
     unlet b:syntastic_loclist
   endif
 
+  highlight github_commit_comment
+        \ ctermfg=black ctermbg=yellow
+        \ guifg=black   guifg=yellow
+  exec 'hi! link QFInfo github_commit_comment'
+
   HierUpdate
   QuickfixStatusEnable
 endfunction
