@@ -17,7 +17,7 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
   endif
 
   let t:sha    = substitute(system('git rev-parse HEAD'), '\r\=\n$', '', '')
-  let t:origin = s:fetch_origin_info()
+  let t:origin = github_commit_comment#git#fetch_origin_info()
 
   if a:message != [] " give message by f-args
     call s:post(
@@ -71,15 +71,6 @@ function! s:is_command_executable(cmd)
     return 0
   endif
   return 1
-endfunction
-
-function! s:fetch_origin_info()
-  let l:origin = split(substitute(system('git config --get remote.origin.url'), '\r\=\n$', '', ''), '/')
-
-  return {
-    \  'repos': substitute(l:origin[-1], '\.git$', '', ''),
-    \  'user': split(l:origin[-2], ':')[-1]
-  \ }
 endfunction
 
 let &cpo = s:save_cpo
