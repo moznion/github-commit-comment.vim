@@ -26,7 +26,8 @@ function! github_commit_comment#fetch#fetch()
       call add(l:info, {
         \ 'filename': l:absolute_path,
         \ 'lnum':     l:position,
-        \ 'text':     'GitHub Comment (' . l:sha[0:6]. '): ' . l:comment.body
+        \ 'text':     'GitHub Comment (' . l:sha[0:6]. '): ' . l:comment.body,
+        \ 'type':     'I'
       \ })
     endif
   endfor
