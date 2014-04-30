@@ -16,7 +16,7 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
     let t:relative_path = github_commit_comment#git#retrieve_relative_path_from_git_root()
   endif
 
-  let t:sha    = substitute(system('git rev-parse HEAD'), '\r\=\n$', '', '')
+  let t:sha    = github_commit_comment#git#get_current_sha()
   let t:origin = github_commit_comment#git#fetch_origin_info()
 
   if a:message != [] " give message by f-args
