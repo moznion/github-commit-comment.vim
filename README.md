@@ -61,7 +61,7 @@ Fill URL of API endpoint in `.github_commit_comment.vim`, like so;
 let g:github_commit_comment_vim = {'api_endpoint': 'http://example.com/api/v3'}
 ```
 
-Default API endpoint is "https://api.github.com". If you don't specify `api_endpoin`, this plugin use this URL.
+Default API endpoint is "https://api.github.com". If you don't specify `api_endpoint`, this plugin use the default URL.
 
 ### Sample of configuration file
 
