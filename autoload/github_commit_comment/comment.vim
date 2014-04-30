@@ -27,6 +27,7 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
       \  t:relative_path,
       \  t:position,
     \ )
+    call github_commit_comment#fetch#fetch()
   else
     let l:tmpfile = '__github_commit_comment_vim_' . localtime()
     10new `=l:tmpfile`
