@@ -19,7 +19,7 @@ set cpo&vim
 command! -nargs=* GitHubLineComment   call github_commit_comment#comment_line(<f-args>)
 command! -nargs=* GitHubFileComment   call github_commit_comment#comment_file(<f-args>)
 command! -nargs=* GitHubCommitComment call github_commit_comment#comment_commit(<f-args>)
-command! -nargs=0 GitHubCommitCommentFetch call github_commit_comment#fetch_comment()
+command! -nargs=0 GitHubFetchCommitComment call github_commit_comment#fetch_comment()
 
 let g:loaded_github_commit_comment = 1
 
