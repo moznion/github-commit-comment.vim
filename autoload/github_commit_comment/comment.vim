@@ -13,7 +13,7 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
 
   let t:relative_path = ''
   if a:comment_type == 1 || a:comment_type == 2 " for line or file comment
-    let t:relative_path = s:retrieve_relative_path()
+    let t:relative_path = github_commit_comment#git#retrieve_relative_path_from_git_root()
   endif
 
   let t:sha    = substitute(system('git rev-parse HEAD'), '\r\=\n$', '', '')
@@ -82,11 +82,6 @@ function! s:fetch_origin_info()
   \ }
 endfunction
 
-function! s:retrieve_relative_path()
-  let l:git_root_fullpath = substitute(system('git rev-parse --show-toplevel'), '\r\=\n$', '', '')
-  let l:current_file_fullpath = expand('%:p')
-  return substitute(l:current_file_fullpath, '^' . l:git_root_fullpath . '/', '', '')
-endfunction
-
 let &cpo = s:save_cpo
 unlet s:save_cpo
+
