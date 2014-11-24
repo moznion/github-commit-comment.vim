@@ -14,6 +14,12 @@ function! github_commit_comment#git#get_last_modified_sha()
   return system('git log --pretty=format:"%H" -1 ' . expand('%:p'))
 endfunction
 
+function! github_commit_comment#git#get_last_modified_line_sha()
+  let output = system('git blame HEAD -L ' . line('.') .',' . line('.') .' -l -M -C --incremental ' . expand('%:p'))
+
+  return matchstr(output, '\w\+')
+endfunction
+
 function! github_commit_comment#git#retrieve_relative_path_from_git_root()
   let l:git_root_fullpath = substitute(system('git rev-parse --show-toplevel'), '\r\=\n$', '', '')
   let l:current_file_fullpath = expand('%:p')
