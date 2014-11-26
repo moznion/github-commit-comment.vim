@@ -16,7 +16,12 @@ function! github_commit_comment#comment#comment(comment_type, message) " `commen
     let t:relative_path = github_commit_comment#git#retrieve_relative_path_from_git_root()
   endif
 
-  let t:sha    = github_commit_comment#git#get_last_modified_sha()
+  if a:comment_type == 2 " for line comment
+    let t:sha = github_commit_comment#git#get_last_modified_line_sha()
+  else
+    let t:sha = github_commit_comment#git#get_last_modified_sha()
+  endif
+
   let t:origin = github_commit_comment#git#fetch_origin_info()
 
   if a:message != [] " give message by f-args
